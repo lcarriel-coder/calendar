@@ -13,7 +13,7 @@ export const Navbar = () => {
     
             <button className="btn btn-outline-danger" onClick={startLogout}>
                 <i className="fas fa-sign-out-alt"></i>
-                <span>Salir</span>
+                <span>Salir</span>  
             </button>
         </div>
       )
