@@ -2,24 +2,32 @@ import { useEffect, useState } from "react";
 import { Calendar } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { Navbar, CalendarEvent, CalendarModal, FabAddNew ,FabDelete} from "../";
+import {
+  Navbar,
+  CalendarEvent,
+  CalendarModal,
+  FabAddNew,
+  FabDelete,
+} from "../";
 import { localizer, getMessagesES } from "../../helpers";
-import { useUiStore ,useCalendarStore } from "../../hooks";
-
-
-
-
-
+import { useUiStore, useCalendarStore, useAuthStore } from "../../hooks";
 
 export const CalendarPage = () => {
-const { openDateModal } = useUiStore();
-const { events, setActiveEvent,startLoadingEvents } = useCalendarStore();
+  const { user } = useAuthStore();
+  const { openDateModal } = useUiStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
 
-  const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
+  const [lastView, setLastView] = useState(
+    localStorage.getItem("lastView") || "week"
+  );
 
   const eventStyleGetter = (event, start, end, isSelected) => {
+
+    const isMyEvent = (user.uid === event.user._id ) || (user.uid === event.user.uid);
+
+
     const style = {
-      backgroundColor: "#347CF7",
+      backgroundColor: isMyEvent ? "#347CF7" : '#465660',
       borderRadios: "0px",
       opacity: 0.8,
       color: "white",
@@ -27,27 +35,24 @@ const { events, setActiveEvent,startLoadingEvents } = useCalendarStore();
     return { style };
   };
 
-
-  const onDoubleClick = ( event ) => {
+  const onDoubleClick = (event) => {
     // console.log({ doubleClick: event });
     openDateModal();
-  }
+  };
 
-  const onSelect = ( event ) => {
+  const onSelect = (event) => {
     console.log({ click: event });
-    setActiveEvent( event );
-  }
+    setActiveEvent(event);
+  };
 
-  const onViewChanged = ( event ) => {
-    localStorage.setItem('lastView', event );
-    setLastView( event )
-  }
-
+  const onViewChanged = (event) => {
+    localStorage.setItem("lastView", event);
+    setLastView(event);
+  };
 
   useEffect(() => {
     startLoadingEvents();
-  }, [])
-  
+  }, []);
 
   return (
     <>
@@ -66,9 +71,9 @@ const { events, setActiveEvent,startLoadingEvents } = useCalendarStore();
         components={{
           event: CalendarEvent,
         }}
-        onDoubleClickEvent={ onDoubleClick  }
-        onSelectEvent={ onSelect }
-        onView={ onViewChanged }
+        onDoubleClickEvent={onDoubleClick}
+        onSelectEvent={onSelect}
+        onView={onViewChanged}
       />
 
       <CalendarModal />

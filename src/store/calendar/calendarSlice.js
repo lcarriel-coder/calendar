@@ -17,12 +17,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
-    isLoadingEvents:true,
+    isLoadingEvents: true,
     events: [
         //tempEvent
     ],
     activeEvent: null
-  }
+}
 
 
 
@@ -31,30 +31,30 @@ export const calendarSlice = createSlice({
     name: 'calendar',
     initialState,
     reducers: {
-        onSetActiveEvent: ( state, { payload }) => {
-         
+        onSetActiveEvent: (state, { payload }) => {
+
             state.activeEvent = payload;
         },
-        onAddNewEvent: ( state, { payload }) => {
-            state.events.push( payload );
+        onAddNewEvent: (state, { payload }) => {
+            state.events.push(payload);
             state.activeEvent = null;
         },
-        onUpdateEvent: ( state, { payload } ) => {
-            state.events = state.events.map( event => {
-                if ( event.id === payload.id ) {
+        onUpdateEvent: (state, { payload }) => {
+            state.events = state.events.map(event => {
+                if (event.id === payload.id) {
                     return payload;
                 }
 
                 return event;
             });
         },
-        onDeleteEvent: ( state ) => {
-            if ( state.activeEvent ) {
-                state.events = state.events.filter( event => event.id !== state.activeEvent.id );
+        onDeleteEvent: (state) => {
+            if (state.activeEvent) {
+                state.events = state.events.filter(event => event.id !== state.activeEvent.id);
                 state.activeEvent = null;
             }
         },
-        onLoadingEvents: ( state , { payload = []} ) => {
+        onLoadingEvents: (state, { payload = [] }) => {
             state.isLoadingEvents = false;
             //state.events = payload;
             payload.forEach(event => {
@@ -63,10 +63,16 @@ export const calendarSlice = createSlice({
                     state.events.push(event)
                 }
             });
-        }
+        },
+        onLogoutCalendar: (state) => {
+            state.isLoadingEvents = true;
+            state.events = [];
+            state.activeEvent = null;
+        },
+
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, onLoadingEvents } = calendarSlice.actions;
+export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent, onLoadingEvents, onLogoutCalendar } = calendarSlice.actions;
