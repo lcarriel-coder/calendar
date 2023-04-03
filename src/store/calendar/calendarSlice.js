@@ -18,9 +18,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isLoadingEvents: true,
-    events: [
-        //tempEvent
-    ],
+    events: [],
     activeEvent: null
 }
 
