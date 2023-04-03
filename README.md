@@ -7,7 +7,7 @@ Realizado con las siguientes tecnologias:
 React
 Redux toolkit
 Css
-React-library-testing - Jest
+React-library-testing - Jest y Vite
 
 
 ##Development pasos
