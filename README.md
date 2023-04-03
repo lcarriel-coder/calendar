@@ -1,5 +1,14 @@
 #Calendar App
 
+App para gestionar un calendario.
+
+Realizado con las siguientes tecnologias:
+
+React
+Redux toolkit
+Css
+React-library-testing - Jest
+
 
 ##Development pasos
 1. Renonbrar el archivo .env.template por .env
@@ -8,6 +17,8 @@
 ```
 VITE_API_URL=http://localhost:4000/api
 ```
+
+
 
 
 Test site
