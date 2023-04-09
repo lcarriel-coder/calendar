@@ -1,4 +1,4 @@
-import { useCalendarStore, useUiStore } from '../../hooks';
+import { useCalendarStore } from '../../hooks';
 
 export const FabDelete = () => {
 
@@ -11,6 +11,7 @@ export const FabDelete = () => {
 
   return (
     <button
+    aria-label="btn-delete"
         className="btn btn-danger fab-danger"
         onClick={ handleDelete }
         style={{
